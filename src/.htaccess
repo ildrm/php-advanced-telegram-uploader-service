@@ -1,0 +1,9 @@
+# The Presentation/Application/Storage/Infrastructure source tree is never
+# served directly — index.php and api/index.php are the only entry points.
+<IfModule mod_authz_core.c>
+    Require all denied
+</IfModule>
+<IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+</IfModule>

@@ -1,0 +1,33 @@
+# Telegram Storage Gateway — root .htaccess
+# Applies to Apache and Apache-compatible servers (LiteSpeed). Ignored by
+# Nginx — see README.md for the equivalent Nginx configuration.
+
+# Never list directory contents.
+Options -Indexes
+
+# Block direct access to configuration and documentation files.
+<FilesMatch "^(config\.php|composer\.(json|lock)|CHANGELOG\.md|README\.md|LICENSE)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Basic security headers.
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "DENY"
+    Header always set Referrer-Policy "no-referrer-when-downgrade"
+</IfModule>
+
+# Raise PHP's own upload limits to match config.php's upload.max_file_size.
+# Only applies under mod_php; harmless no-op under PHP-FPM. On PHP-FPM
+# hosts, set these in php.ini or a .user.ini file instead.
+<IfModule mod_php.c>
+    php_value upload_max_filesize 50M
+    php_value post_max_size 55M
+    php_value max_execution_time 120
+</IfModule>

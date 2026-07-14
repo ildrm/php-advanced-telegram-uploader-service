@@ -1,0 +1,276 @@
+:root {
+    color-scheme: light dark;
+    --color-bg: #f5f6f8;
+    --color-surface: #ffffff;
+    --color-border: #dcdfe4;
+    --color-text: #1c1f24;
+    --color-text-muted: #6b7280;
+    --color-primary: #2b6cff;
+    --color-primary-contrast: #ffffff;
+    --color-success: #1a9e5c;
+    --color-error: #d92d20;
+    --color-warning: #b5750a;
+    --radius: 10px;
+    --shadow: 0 1px 3px rgba(16, 24, 40, 0.08), 0 1px 2px rgba(16, 24, 40, 0.06);
+}
+
+:root[data-theme="dark"] {
+    --color-bg: #14161a;
+    --color-surface: #1c1f24;
+    --color-border: #2c2f36;
+    --color-text: #e7e9ec;
+    --color-text-muted: #9aa1ab;
+    --color-primary: #5b8dff;
+    --color-primary-contrast: #0b0d10;
+    --color-success: #3ecf8e;
+    --color-error: #f97066;
+    --color-warning: #f2b84b;
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --color-bg: #14161a;
+        --color-surface: #1c1f24;
+        --color-border: #2c2f36;
+        --color-text: #e7e9ec;
+        --color-text-muted: #9aa1ab;
+        --color-primary: #5b8dff;
+        --color-primary-contrast: #0b0d10;
+        --color-success: #3ecf8e;
+        --color-error: #f97066;
+        --color-warning: #f2b84b;
+        --shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+}
+
+.page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem 4rem;
+}
+
+.page__header {
+    position: relative;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.page__title {
+    font-size: 1.75rem;
+    margin: 0 0 0.5rem;
+}
+
+.page__subtitle {
+    color: var(--color-text-muted);
+    margin: 0;
+}
+
+.page__footer {
+    margin-top: 3rem;
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+}
+
+.theme-toggle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text);
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+.theme-toggle:hover {
+    border-color: var(--color-primary);
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+.dropzone {
+    border: 2px dashed var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    padding: 3rem 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.dropzone:hover,
+.dropzone:focus-visible {
+    border-color: var(--color-primary);
+    outline: none;
+}
+
+.dropzone.is-dragover {
+    border-color: var(--color-primary);
+    background: color-mix(in srgb, var(--color-primary) 8%, var(--color-surface));
+}
+
+.dropzone__text {
+    margin: 0 0 0.35rem;
+    font-weight: 600;
+}
+
+.dropzone__hint {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+}
+
+.results {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.result-card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    box-shadow: var(--shadow);
+    padding: 1rem 1.25rem;
+}
+
+.result-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.result-card__filename {
+    font-weight: 600;
+    word-break: break-all;
+}
+
+.result-card__status {
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+    white-space: nowrap;
+    background: var(--color-border);
+    color: var(--color-text-muted);
+}
+
+.result-card__status.is-uploading {
+    background: color-mix(in srgb, var(--color-primary) 15%, transparent);
+    color: var(--color-primary);
+}
+
+.result-card__status.is-success {
+    background: color-mix(in srgb, var(--color-success) 15%, transparent);
+    color: var(--color-success);
+}
+
+.result-card__status.is-error {
+    background: color-mix(in srgb, var(--color-error) 15%, transparent);
+    color: var(--color-error);
+}
+
+.result-card__progress {
+    margin-top: 0.75rem;
+    height: 6px;
+    border-radius: 999px;
+    background: var(--color-border);
+    overflow: hidden;
+}
+
+.result-card__progress-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--color-primary);
+    transition: width 0.15s ease;
+}
+
+.result-card__meta {
+    margin: 0.85rem 0 0;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.35rem 0.75rem;
+    font-size: 0.85rem;
+}
+
+.result-card__meta dt {
+    color: var(--color-text-muted);
+}
+
+.result-card__meta dd {
+    margin: 0;
+    word-break: break-all;
+}
+
+.result-card__error {
+    margin-top: 0.75rem;
+    color: var(--color-error);
+    font-size: 0.9rem;
+}
+
+.result-card__actions {
+    margin-top: 0.85rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.result-card__actions button {
+    font: inherit;
+    font-size: 0.8rem;
+    padding: 0.35rem 0.7rem;
+    border-radius: 6px;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+    color: var(--color-text);
+    cursor: pointer;
+}
+
+.result-card__actions button:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+.result-card__json {
+    margin-top: 0.85rem;
+    max-height: 220px;
+    overflow: auto;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 0.75rem;
+    font-size: 0.75rem;
+    white-space: pre-wrap;
+    word-break: break-all;
+    display: none;
+}
+
+.result-card__json.is-visible {
+    display: block;
+}
